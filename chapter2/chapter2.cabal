@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7cd0fcb9dc6ae0db19811486c0de1d31b4ef0e517baaec930e963064e050e374
+-- hash: 3a8134ef94f8c969889629ab32c9c1798323a95e0c2bac1e9f06b879ff88fe3b
 
 name:           chapter2
 version:        0.1.0.0
@@ -34,6 +34,8 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , fmt
+    , random
   default-language: Haskell2010
 
 executable chapter2-exe
@@ -46,6 +48,8 @@ executable chapter2-exe
   build-depends:
       base >=4.7 && <5
     , chapter2
+    , fmt
+    , random
   default-language: Haskell2010
 
 test-suite chapter2-test
@@ -59,4 +63,6 @@ test-suite chapter2-test
   build-depends:
       base >=4.7 && <5
     , chapter2
+    , fmt
+    , random
   default-language: Haskell2010
