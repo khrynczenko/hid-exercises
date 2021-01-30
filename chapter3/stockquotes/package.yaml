@@ -28,8 +28,11 @@ dependencies:
 - blaze-html
 - blaze-colonnade
 - Chart
+- Chart-diagrams
 - text
 - bytestring
+- vector
+- fmt
 
 
 executables:
