@@ -1,0 +1,17 @@
+module Main where
+
+import Control.Monad.State
+
+type Counter = State Int
+
+doSomething :: Counter String
+doSomething = state (\state -> ("Welcome", state)) >>= put 2 >> doSomethingAgain
+
+doSomethingAgain :: Counter String
+doSomethingAgain = state (\state -> ("Welcome", state + 1))
+
+main :: IO ()
+main = do
+    let (result, counts) = runState doSomething 1
+    (putStrLn . show) counts
+
