@@ -16,7 +16,7 @@ mainIORef = do
         readMaybe <$> getLine
 
     processNumber acc Nothing = readIORef acc
-    processNumber acc (Just n) = fmap (+n) (readIORef acc) >>= writeIORef acc >> go acc
+    processNumber acc (Just n) = modifyIORef' acc (+n) >> go acc
     
 
 main :: IO ()
