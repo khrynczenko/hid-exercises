@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module ParseIP where
 
@@ -45,7 +46,7 @@ buildIP octets = (IP . fst) $ foldr go (0, 1) octets
 
 parseIP :: String -> Maybe IP
 parseIP text = pure text 
-    >>= guarded (isLengthOf 4) . fmap T.unpack . T.splitOn (T.pack ".") . T.pack
+    >>= guarded (isLengthOf 4) . fmap T.unpack . T.splitOn "." . T.pack
     >>= mapM (\x -> (readMaybe x :: Maybe Word8) >>= guarded fitsOctet)
     >>= (pure . buildIP)
   where
@@ -54,7 +55,7 @@ parseIP text = pure text
 parseIPRange :: String -> Maybe IPRange
 parseIPRange text =
     pure text
-    >>= guarded (isLengthOf 2) . fmap T.unpack . T.splitOn (T.pack ",") . T.pack
+    >>= guarded (isLengthOf 2) . fmap T.unpack . T.splitOn "," . T.pack
     >>= mapM parseIP
     >>= listToIPRange
   where
