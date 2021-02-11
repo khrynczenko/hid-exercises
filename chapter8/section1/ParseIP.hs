@@ -45,10 +45,10 @@ buildIP octets = (IP . fst) $ foldr go (0, 1) octets
     --fitsOctet value = 0 <= value && value < 256
 
 parseIP :: String -> Maybe IP
-parseIP text = pure text 
-    >>= guarded (isLengthOf 4) . fmap T.unpack . T.splitOn "." . T.pack
-    >>= mapM (\x -> (readMaybe x :: Maybe Word8) >>= guarded fitsOctet)
-    >>= (pure . buildIP)
+parseIP text =
+    (guarded (isLengthOf 4) . fmap T.unpack . T.splitOn "." . T.pack
+    >=> mapM (\x -> (readMaybe x :: Maybe Word8) >>= guarded fitsOctet)
+    >=> (pure . buildIP)) text
   where
     fitsOctet value = 0 <= value && value < 256
 
